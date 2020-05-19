@@ -17,6 +17,6 @@ generate the figures.
 
 | File                    | Description                                 |
 |-------------------------+---------------------------------------------|
-| [[./chuetsuoki/traces.csv]] | Chuetsu-Oki case running for 500 Iterations |
-| [[./ligurian/traces.csv]]   | Ligurian case running for 300 Iterations    |
-| [[./sishuan/traces.csv]]    | Sishuan case running for 1000 Iterations    |
+| [[./chuetsuoki/traces.csv.gz]] | Chuetsu-Oki case running for 500 Iterations |
+| [[./ligurian/traces.csv.gz]] | Ligurian case running for 300 Iterations    |
+| [[./sishuan/traces.csv.gz]] | Sishuan case running for 1000 Iterations    |
