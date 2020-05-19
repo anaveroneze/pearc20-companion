@@ -1,0 +1,22 @@
+# -- org-startup-with-inline-images: nil --
+#+TITLE: Companion Data - PEARC20
+#+AUTHOR: Solorzano, Nesi, Schnorr
+#+LATEX_HEADER: \usepackage[margin=2cm,a4paper]{geometry}
+#+STARTUP: overview indent noinlineimages
+#+TAGS: noexport(n) deprecated(d)
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+SEQ_TODO: TODO(t!) STARTED(s!) WAITING(w!) | DONE(d!) CANCELLED(c!) DEFERRED(f!)
+
+This directory presents all data resulting from our experiment with
+the Ondes3D simulator for three earthquake scenarios: Chuetsu-Oki,
+Ligurian, and Sishuan. These data are needed to run the [[./scripts]] that
+generate the figures.
+
+* Data description
+
+| File                    | Description                                 |
+|-------------------------+---------------------------------------------|
+| [[./chuetsuoki/traces.csv]] | Chuetsu-Oki case running for 500 Iterations |
+| [[./ligurian/traces.csv]]   | Ligurian case running for 300 Iterations    |
+| [[./sishuan/traces.csv]]    | Sishuan case running for 1000 Iterations    |
