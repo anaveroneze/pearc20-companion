@@ -1,0 +1,148 @@
+# -- org-startup-with-inline-images: nil --
+#+TITLE: Companion Material - PEARC20
+#+AUTHOR: Solorzano, Nesi, Schnorr
+#+LATEX_HEADER: \usepackage[margin=2cm,a4paper]{geometry}
+#+STARTUP: overview indent noinlineimages
+#+TAGS: noexport(n) deprecated(d)
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+SEQ_TODO: TODO(t!) STARTED(s!) WAITING(w!) | DONE(d!) CANCELLED(c!) DEFERRED(f!)
+
+* Introduction
+
+Companion Material for the poster ``Using Visualization of Performance
+Data to Investigate Load Imbalance of a Geophysics Parallel
+Application''. Published In Practice and Experience in Advanced Research
+Computing (PEARC ’20), July 26–30, 2020, Portland, OR, USA. ACM, New
+York, NY, USA, Article 39, 7
+pages. [[https://doi.org/10.1145/3311790.3400844]]
+
+
+You can clone this repository with the following command:
+#+begin_src shell :session *shell* :results output :exports both 
+git clone https://gitlab.com/anaveroneze/pearc20-companion.git
+#+end_src
+
+- The [[./img]] directory contains the expected Figures for our code
+  snippets
+- The [[./data]] directory contains the outputs of Ondes3D in ~csv~ file
+  format, used in our work
+- The [[./scripts]] directory contains the code snippets used to generate
+  the figures
+
+** Authors
+- Ana Luisa Veroneze Solórzano - Informatics Institute/UFRGS, Brazil
+- Lucas Leandro Nesi - Informatics Institute/UFRGS, Brazil
+- Lucas Mello Schnorr - Informatics Institute/UFRGS, Brazil
+
+** Ondes3D 
+The chosen geophysics parallel application to investigate the load
+imbalance was Ondes3D. It is an application to simulate seismic wave
+propagation in three-dimensional geological media for earthquakes
+scenarios. It is parallelized with MPI to run in homogeneous
+architectures, receiving as input a geological model that
+characterizes a region affected by the earthquake.
+
+* Requirements
+
+We present the code snippets to generate the Figures used in our
+investigation. We provide descriptions about each produced Figure to
+encourage replication, enriching the understanding of our results.
+
+The data frame manipulation codes were written in the R programming
+language using [[https://www.tidyverse.org/][tidyverse]], a collection of R packages for data science,
+including the [[https://ggplot2.tidyverse.org/][ggplot2]], used to create graphics. The snippets outputs
+generate images in the PNG format. We used the [[https://github.com/karthik/wesanderson/blob/master/README.md][Wes Anderson palette]],
+but you can use your palette or the default coloring by commenting on
+the scale_color_manual function.
+
+# We also used the [[https://github.com/wesm/feather/tree/master/R][feather package]] to convert our output from CSV to
+# the feather file format, which stores the data in a computer-native
+# binary format, being faster to read and to write. 
+
+To install the requested R packages, run the snippet down below:
+#+begin_src R :results output :session *R* :exports code
+install.packages(c("tidyverse", "wesanderson"))
+#+end_src
+
+Our code was generated in the following R environment:
+#+begin_src R :results output :session *R* :exports both
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(wesanderson)
+require(gridExtra)
+
+sessionInfo()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+
+R version 3.6.1 (2019-07-05)
+Platform: x86_64-conda_cos6-linux-gnu (64-bit)
+Running under: Ubuntu 18.04.4 LTS
+
+Matrix products: default
+BLAS/LAPACK: /home/ana/miniconda3/envs/mooc/lib/R/lib/libRblas.so
+
+locale:
+ [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=pt_BR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
+ [5] LC_MONETARY=pt_BR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
+ [7] LC_PAPER=pt_BR.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=pt_BR.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] gridExtra_2.3     wesanderson_0.3.6 tidyr_1.0.2       dplyr_0.8.5      
+[5] ggplot2_3.3.0    
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.1       withr_2.1.2      assertthat_0.2.1 crayon_1.3.4    
+ [5] grid_3.6.1       R6_2.4.0         lifecycle_0.2.0  gtable_0.3.0    
+ [9] magrittr_1.5     scales_1.0.0     pillar_1.3.1     rlang_0.4.5     
+[13] vctrs_0.2.4      tools_3.6.1      glue_1.3.1       purrr_0.3.2     
+[17] munsell_0.5.0    compiler_3.6.1   pkgconfig_2.0.2  colorspace_1.4-1
+[21] tcltk_3.6.1      tidyselect_0.2.5 tibble_2.1.1
+#+end_example
+
+* Datasets
+
+The datasets are stored in the [[./data]] directory. It contains:
+
+** Case Studies
+
+We used three datasets to perform our investigation:
+1. Ligurian, that happened in 1887 on north-western Italy and
+   south-eastern France, is the largest earthquake in the region
+2. Chuetsu-Oki, happened in 2007 in Japan and caused no significant
+   surface rupture and damage to modern structures
+3. Sishuan, occurred in 2008 at China leaving more than 80,000
+   casualties, four million people homeless, and major economic losses
+
+The number of iterations is defined in the ~prm~ file of each cases'
+directory. We run the experiments with a number of Iterations smaller
+than the complete execution of each case, but sufficient to identify
+the imbalance between the processes.
+
+| Case         | Year | Location     | Iterations |
+|--------------+------+--------------+------------|
+| Ligurian     | 1887 | France/Italy |        300 |
+| Chuetsui-Oki | 2007 | Japan        |        500 |
+| Sishuan      | 2008 | China        |       1000 |
+
+** Metrics
+
+To calculate the imbalance we used five imbalance metrics available in
+the file [[./scripts/imb_func.R]].
+
+* Scripts to generate Figures
+
+The script to create the Figures presented in [[./img]] used in our paper
+are in the [[./scripts]] directory.
+
+
