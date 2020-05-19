@@ -17,6 +17,7 @@ Computing (PEARC ’20), July 26–30, 2020, Portland, OR, USA. ACM, New
 York, NY, USA, Article 39, 7
 pages. [[https://doi.org/10.1145/3311790.3400844]]
 
+Cite the code: [[https://zenodo.org/badge/latestdoi/265267959][https://zenodo.org/badge/265267959.svg]]
 
 You can clone this repository with the following command:
 #+begin_src shell :session *shell* :results output :exports both 
