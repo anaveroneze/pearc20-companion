@@ -1,0 +1,32 @@
+# -- org-startup-with-inline-images: nil --
+#+TITLE: Companion Scripts - PEARC20
+#+AUTHOR: Solorzano, Nesi, Schnorr
+#+LATEX_HEADER: \usepackage[margin=2cm,a4paper]{geometry}
+#+STARTUP: overview indent noinlineimages
+#+TAGS: noexport(n) deprecated(d)
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+SEQ_TODO: TODO(t!) STARTED(s!) WAITING(w!) | DONE(d!) CANCELLED(c!) DEFERRED(f!)
+
+This directory presents all the R scripts needed to reproduce the
+Figures in our paper for PEARC20.
+
+* Unpack traces in csv format
+#+begin_src shell :results output :exports code
+gunzip ./../data/chuetsuoki/traces.csv.gz
+gunzip ./../data/ligurian/traces.csv.gz
+gunzip ./../data/sishuan/traces.csv.gz
+#+end_src
+  
+* Read csv files and name columns properly
+#+begin_src shell :results output :exports code
+Rscript read_files.R
+#+end_src
+
+* Figures table
+  | Section | Figure | About                                    | Script       |
+  |---------+--------+------------------------------------------+--------------|
+  |       2 | 1(a)   | Spatial load distribution for Ligurian   | [[./figure1a.R]] |
+  |       2 | 1(b)   | Temporal load distribution for each case | [[./figure1b.R]] |
+  |       5 | 2      | Load evolution along Ligurian iterations | [[./figure2.R]]  |
+  |       5 | 3      | Load imbalance metrics evolution         | [[./figure3.R]]  |
